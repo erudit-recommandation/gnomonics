@@ -130,8 +130,8 @@ def plot_persona(codebook,bmu_wordmatrix,dir_path,mapsize=[40,60],figsize=[80,40
                 else:
                     color = "w"
                 ax.text(j, i,' '.join([' '.join(g)+'\n' for g in [words[i,j].split()[k:k + n] for k in range(0, len(words[i,j].split()), n)]][:5]),
-                ha="center", va="center", color=color,**csfont,fontsize=4)
-                ax.text(j-0.5, i-0.5, str(j)+'_'+str(i),ha="left", va="top",color=color,**csfont,fontsize=4)
+                ha="center", va="center", color=color,fontsize=4,**csfont)
+                ax.text(j-0.5, i-0.5, str(j)+'_'+str(i),ha="left", va="top",color=color,fontsize=4,**csfont)
             except:
                 pass
     plt.axis('off')
@@ -157,7 +157,7 @@ def plot_persona_grid(dir_path,mapsize=[40,60],figsize=[20,40],save=True):
                      )   
 
     for ax, im, t,a in zip(grid,cb,df['title'],df['author']):
-        ax.text(30,5,t+'\n ('+a+')',fontsize=8,**csfont,color='white',horizontalalignment='center',verticalalignment='center')
+        ax.text(30,5,t+'\n ('+a+')',fontsize=8,color='white',horizontalalignment='center',verticalalignment='center',**csfont)
         ax.imshow(im.reshape(msz0,msz1),cmap=cm)
         ax.axis('off')
     plt.show()
@@ -194,8 +194,8 @@ def plot_single_persona(corpus,codebook,bmu_wordmatrix,dir_path,author,title,
                 else:
                     color = "w"
                 ax.text(j, i,' '.join([' '.join(g)+'\n' for g in [words[i,j].split()[k:k + n] for k in range(0, len(words[i,j].split()), n)]][:6]),
-                ha="center", va="center", color=color,**csfont,fontsize=4)
-                ax.text(j-0.5, i-0.5, str(j)+'_'+str(i),ha="left", va="top",color=color,**csfont,fontsize=4)
+                ha="center", va="center", color=color,fontsize=4,**csfont)
+                ax.text(j-0.5, i-0.5, str(j)+'_'+str(i),ha="left", va="top",color=color,fontsize=4,**csfont)
             except:
                 pass
     ax.set_title(df_sel['title'].values[0]+' ('+df_sel['author'].values[0]+')',fontsize=16)
@@ -241,7 +241,7 @@ def plot_persona_talks(corpus,codebook,vectors,dir_path,tsne_path,replace_tsne=T
         else:
             img = OffsetImage(i.reshape(shape[1],shape[0]), zoom=persona_zoom, cmap=cm, alpha=1.0)
         ab = AnnotationBbox(img, (x0, y0), xycoords='data', frameon=False)
-        text = plt.text(x0, y0, w +'\n(' + a + ')', fontsize=4,**csfont,color=txt_color,horizontalalignment='center',verticalalignment='bottom')
+        text = plt.text(x0, y0, w +'\n(' + a + ')', fontsize=4,color=txt_color,horizontalalignment='center',verticalalignment='bottom',**csfont)
         artists.append(ax.add_artist(ab))
         artists.append(ax.add_artist(text))
     ax.update_datalim(tsne_doc)
@@ -277,8 +277,8 @@ def plot_persona_talks_grid(df_namecols,tsne_vectors,codebook,outpath,mapsize=[1
         try:
             df_tsneSOM_sel = df_tsneSOM[df_tsneSOM['bmu']==i].iloc[0]
             alpha = len(df_tsneSOM[df_tsneSOM['bmu']==i])/max_bmu_cnt
-            ax.text(30,8,df_tsneSOM_sel['title']+'\n ('+df_tsneSOM_sel['author']+')',fontsize=4,**csfont,color='white',horizontalalignment='center',verticalalignment='center')
-            ax.imshow(df_tsneSOM_sel.iloc[3:].values.reshape(persona_shape[0],persona_shape[1]).astype('float'),cmap=cm,alpha=alpha)
+            ax.text(30,8,df_tsneSOM_sel['title']+'\n ('+df_tsneSOM_sel['author']+')',fontsize=4,color='white',horizontalalignment='center',verticalalignment='center')
+            ax.imshow(df_tsneSOM_sel.iloc[3:].values.reshape(persona_shape[0],persona_shape[1]).astype('float'),cmap=cm,alpha=alpha,**csfont)
             ax.axis('off')
         except:
             ax.axis('off')

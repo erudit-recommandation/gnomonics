@@ -4,4 +4,10 @@ scikit-learn-intelex==2021.5.3
 nltk==3.7 
 gensim==4.2.0 
 spacy==3.3.0 
-beautifulsoup4==4.11.1 
+beautifulsoup4==4.11.1
+scikit-learn==1.0.2
+matplotlib==3.5.2
+scipy==1.8.0
+numexpr3==3.0.1a6
+ipdb==0.13.9
+scikit-image==0.19.2 
