@@ -35,7 +35,7 @@ def preprocessing_text(text,language,remove_sw=True,stem=False,min_word_len=3):
     #print(text_f,'\n')
     if stem is True:
         words = text_f.split()
-        text_f = ' '.join([SnowballStemmer(language=language,ignore_stopwords=True).stem(w) for w in words])
+        text_f = ' '.join([SnowballStemmer(language=language,ignore_stopwords=False).stem(w) for w in words])
     else:
         pass
     #print(text_f,'\n')
@@ -45,7 +45,7 @@ def sent_to_words(sentences):
     for sentence in sentences:
         yield gensim.utils.simple_preprocess(str(sentence), deacc=True)  # deacc=True removes punctuations
            
-def lemmatizing_text(text,language,allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV', 'PROPN'],min_word_len=3):
+def lemmatizing_text(text,language,allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV', 'PROPN'],min_word_len=3,remove_sw=True):
     data = text
     #data = text.values.tolist()
     data_words = list(sent_to_words(data))
@@ -66,7 +66,11 @@ def lemmatizing_text(text,language,allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'
         doc = nlp(" ".join(sent)) 
         doc = [token.lemma_ for token in doc if token.pos_ in allowed_postags]
         doc = [w for w in doc if len(w) >= 3]
-        texts_out.append(' '.join([word for word in doc if word not in stop_words]))
+        if remove_sw is True:
+            doc = [word for word in doc if word not in stop_words]
+        else:
+            pass
+        texts_out.append(' '.join(doc))
     return texts_out
     
 def lemmatizing_text_old(text,language,allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
