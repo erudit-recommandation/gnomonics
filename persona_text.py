@@ -329,7 +329,7 @@ def persona_talks_grid(cb_vectors,corpus,som_outpath,gridsize=[50,50],som_verbos
     
     print("... projecting codebook to vectors")
     cb_bmus = som.project_data(cb_vectors)
-    df_cb_grid = pd.concat([pd.Series(cb_bmus,name='bmu'),corpus.loc[:,['title','author']],pd.DataFrame(cb_vectors)],axis=1)
+    df_cb_grid = pd.concat([pd.Series(cb_bmus,name='bmu'),corpus.loc[:,['title','author', 'idproprio']],pd.DataFrame(cb_vectors)],axis=1)
     
     if plot_grid==True:
         print('... plotting figure')
