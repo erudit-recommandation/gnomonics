@@ -66,10 +66,12 @@ def corpus_vectors(corpus,dict_outpath=None,vectorizer='Count',vocab=None,max_fe
 
 csfont = {'fontname':'DIN Condensed'}
 
-def vectors_som(vectors,words,mapsize=[40,60],normalization='var',initialization='pca',verbose=None,som_outpath=False):
+def vectors_som(vectors,words,mapsize=[40,60],normalization='var',initialization='pca',verbose=None,som_outpath=False, ask=True):
     # Check if SOM model is already stored at som_outpath
     if os.path.exists(som_outpath)==True:
-        response = input("SOM model already saved, recalculate? [y/n] ")
+        response= 'y'
+        if ask:
+            response = input("SOM model already saved, recalculate? [y/n] ")
         if response == 'y':
             print("... learning vector dimensionality (SOM)")
             som = SOMFactory().build(vectors, mapsize = [mapsize[0],mapsize[1]])
@@ -306,9 +308,11 @@ def plot_persona_talks_grid(df_namecols,tsne_vectors,codebook,outpath,mapsize=[1
     else:
         pass
     
-def persona_talks_grid(cb_vectors,corpus,som_outpath,gridsize=[50,50],som_verbose='info',plot_grid=False,save_plot=False,save_plot_path=False,masksize=[50,50],figsize=(40,40)):
+def persona_talks_grid(cb_vectors,corpus,som_outpath,gridsize=[50,50],som_verbose='info',plot_grid=False,save_plot=False,save_plot_path=False,masksize=[50,50],figsize=(40,40), ask=True):
     if os.path.exists(som_outpath)==True:
-        response = input("SOM model already saved, recalculate? [y/n] ")
+        response = 'y'
+        if ask:
+            response = input("SOM model already saved, recalculate? [y/n] ")
         if response == 'y':
             print("... learning vector dimensionality (SOM)")
             som = SOMFactory().build(cb_vectors, mapsize = [gridsize[0],gridsize[1]])
