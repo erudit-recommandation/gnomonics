@@ -23,8 +23,12 @@ from sompy.sompy import SOMFactory
 
 import random
 
-from sklearnex import patch_sklearn
-patch_sklearn()
+try:
+    from sklearnex import patch_sklearn
+    patch_sklearn()
+except:
+    print("sklearnex not activated")
+
 
 #import multiprocessing
 logging.getLogger('matplotlib.font_manager').disabled = True
